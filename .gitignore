@@ -17,6 +17,7 @@ env.bak/
 venv.bak/
 
 # personal settings
+.vscode
 
 
 # Flask stuff:
