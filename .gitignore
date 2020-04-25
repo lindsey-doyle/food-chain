@@ -4,6 +4,9 @@ data
 # Byte-compiled files
 _pycache_
 
+# API Keys 
+config/keys.json
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
