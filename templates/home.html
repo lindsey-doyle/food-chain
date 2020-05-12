@@ -1,17 +1,39 @@
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
-    <title>Habits Home</title>
+    <title>Habits</title>
   </head>
+  
   <body>
     {% extends "template.html" %}
     {% block content %}
     
-    <h1>Placeholder Home Page</h1>
-    <p> Nothing to see here... </p>
+  <div class="center-on-page">  
+    
+    <h1> Restaurant Finder: </h1>
+    
+    <form class="form-inline" method="POST" action="{{ url_for('result') }}">
+        
+        <div class="select">
+            <select name="comp_select" class="selectpicker form-control">
+                
+                {% for o in data %}
+                
+                <option value="{{ o.name }}">{{ o.name }}</option>
+                
+                {% endfor %}
 
-    {% endblock %}
-  </body>
+            </select>
+        </div>
+        <button type="submit" class="btn">Go</button>
+
+        {% endblock %}
+  
+      </body>
+
+ 
 </html>

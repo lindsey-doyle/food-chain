@@ -1,20 +1,25 @@
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>About Habits</title>
   </head>
+  
+  
   <body>
     {% extends "template.html" %}
     {% block content %}
     
-    <h1> Placeholder About Page</h1>
-    <p> DSC180B Capstone Project by Lindsey, Pace and Marcus. </p>
-    <p> "Habits" offers insight into users’ eating habits, 
-        as well as personalized recommendations based on their palate.
-        (or something).</p>
+    <h1> This page will contain our project viz</h1>
+    
+    <p style="color:white;"> [ viz 1 ] </p>
+    <p style="color:white;"> [ viz 2 ]</p>
 
     {% endblock %}
+
   </body>
+
 </html>
