@@ -259,6 +259,11 @@ def etl(**cfg):
     df = result[result['Name']!=nxt['name']]
     target = result[result['Name']==nxt['name']]
 
+    # TODO - 
+    # 1. write a line that creates a new folder called 'data' (just like in 180A)
+    # 2. instead of returning df and target, 
+    #    output them to subfolder(s) of that new 'data' folder
+    # note - instead of hardcoding the new folders' filepaths, 
+    #       get them from cfg['outpath']. (I've already added this param to get-data.json)
+
     return df, target
-
-

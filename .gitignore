@@ -5,7 +5,7 @@ data
 _pycache_
 
 # API Keys 
-/config/keys.json
+#/config/keys.json
 
 # Jupyter Notebook
 .ipynb_checkpoints
