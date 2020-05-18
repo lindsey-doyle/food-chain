@@ -21,7 +21,7 @@ def get_input():
     Prompts the user to input their restaurant name and
     their location
     '''
-    inp = input('Enter thename and location (city) of your restaurant separated by a comma:')
+    inp = input('Enter the name and location (city) of your restaurant separated by a comma:')
     name = inp.split(',')[0]
     location = inp.split(',')[1]
     return name, location
@@ -56,7 +56,8 @@ def verify_listing(name, location, api):
     for i in range(len(nxt['categories'])):
         cats += [nxt['categories'][i]['title']]
     print(cats)
-    inp = input("What is the index of the correct category?")
+    #inp = input("What is the index of the correct category?")
+    inp = input("What is the index of the category you are interested in?")
     cat = cats[int(inp)]
     return nxt, cat
 
@@ -113,13 +114,15 @@ def etl(**cfg):
     API = cfg['api_key']
     HEADERS = {'Authorization': 'bearer %s' % API}
     ENDPOINT = 'https://api.yelp.com/v3/businesses/search'
+    
+    name, location = get_input()
+    nxt, cat = verify_listing(name, location, API)
+    count = 0
+
     #Initialize lists for collecting data
     name, url, phone, address, city, state, czip, rating = [], [], [], [], [], [], [], []
     review_count, vertical, price, latitude, longitude = [], [], [], [], []
     yelp_id, review1, review2, review3 = [], [], [], []
-    name, location = get_input()
-    nxt, cat = verify_listing(name, location, API)
-    count = 0
 
     for page in tqdm([0,50,100,150]):
         count+=1
@@ -189,6 +192,7 @@ def etl(**cfg):
     result['Vertical1'], result['Vertical2'], result['Vertical3'] = vertical_split(result['Vertical'])
     result.drop_duplicates(subset=['Phone'], inplace=True)
     result.drop_duplicates(subset=['Name'], inplace=True)
+    result['Reviews'] = result['Review1'] + ' ' + result['Review2'] + ' ' + result['Review3']
     result['Reviews'] = result['Reviews'].apply(lambda x: clean_text_round1(x))
     add_stop_words = []
     stop_words = text.ENGLISH_STOP_WORDS.union(add_stop_words)
@@ -268,6 +272,13 @@ def etl(**cfg):
     
     # 2. output the df to data/raw as 'df.csv'
     #    and the target restaurant's yelp ID to data/raw as 'input_listing.txt' 
+    df.to_csv('data/raw/df.csv')
+    
+    print(target)
+    # data/raw/input_listing.txt'
+    with open('data/raw/input_listing.txt', 'w') as f:
+        f.write('ID_goes_here')
    
-
-    return df, target
+    
+    #return df, target
+    return
