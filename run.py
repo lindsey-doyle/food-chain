@@ -31,7 +31,6 @@ def main(targets):
 
     # make the clean target
     if 'clean' in targets:
-        shutil.rmtree('data/temp',ignore_errors=True)
         shutil.rmtree('data/out',ignore_errors=True)
         shutil.rmtree('data/raw',ignore_errors=True)
 
@@ -39,11 +38,6 @@ def main(targets):
     if 'data' in targets:
         cfg = load_params(DATA_PARAMS)
         etl(**cfg)
-        # This line above replaces the two lines below once we edit 
-        # the etl() method in get_data.py to output them to 'data/raw' directly 
-        #  -  df, target = etl(**cfg)
-        #  -  total = pd.concat([df, target])
-
     
     if 'model' in targets:
         cfg = load_params(MODEL_PARAMS)
