@@ -347,10 +347,9 @@ def get_recommendations(ps, df, input_restaurant, metapath, N, top_n):
 def driver(**cfg):
 
     # get Yelp ID of input restaurant
-    #fname = cfg['input_listing']
-    #f = open(fname, 'r')
-    #input_restaurant = f.read() # 'AlO78to1upUkVhRx12XtVA'
-    input_restaurant = 'AlO78to1upUkVhRx12XtVA' # replace this line with ones above !
+    fname = cfg['input_listing']
+    f = open(fname, 'r')
+    input_restaurant = f.read() # Yelp ID 
 
     # get metapath to use
     metapath = cfg['metapath']
@@ -360,17 +359,13 @@ def driver(**cfg):
     top_n = cfg['top_n']
 
     # read in data 
-    #fp = cfg['indir'] # 'data/raw/df.csv'
-    fp = 'data/data_ingestion.csv' # replace this
+    fp = cfg['indir'] # 'path/to/df.csv'
     df = pd.read_csv(fp)
 
     # Create Matrices
-
-    # A
     A_tuples = data_to_A_matrix(df)
     A_matrix = A_matrix_func(df, A_tuples)
 
-    # P
     P_matrix = data_to_P_matrix(df)
     P_matrix = P_matrix_func(df, P_matrix)
 

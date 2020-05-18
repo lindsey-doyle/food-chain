@@ -1,0 +1,8 @@
+{
+    "indir": "test/test_data/raw/df.csv",
+    "input_listing": "test/test_data/raw/input_listing.txt",
+    "metapath": "CAC",
+    "N": 50,
+    "top_n": 10,
+    "outdir": "test/test_data/out/"
+}

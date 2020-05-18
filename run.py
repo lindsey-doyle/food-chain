@@ -52,8 +52,7 @@ def main(targets):
     # make the test target
     if 'test-project' in targets:
         cfg = load_params(TEST_PARAMS)
-        # run through project pipeline
-        # using data stored in 'data_test'
+        driver(**cfg)
     
 
     #env = load_params(ENV)
