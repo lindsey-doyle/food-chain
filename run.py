@@ -56,7 +56,7 @@ def main(targets):
         # using data stored in 'data_test'
     
 
-    env = load_params(ENV)
+    #env = load_params(ENV)
 
     print('Finished in: {} seconds'.format(time.time() - start_time))
     return

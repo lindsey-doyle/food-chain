@@ -3,6 +3,7 @@ data
 
 # Byte-compiled files
 _pycache_
+src/__pycache__/
 
 # API Keys 
 #/config/keys.json

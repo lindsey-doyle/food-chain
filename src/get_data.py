@@ -194,10 +194,10 @@ def etl(**cfg):
     stop_words = text.ENGLISH_STOP_WORDS.union(add_stop_words)
 
     class LemmaTokenizer(object):
-    def __init__(self):
-        self.wnl = WordNetLemmatizer()
-    def __call__(self, articles):
-        return [self.wnl.lemmatize(t) for t in word_tokenize(articles)]
+        def __init__(self):
+            self.wnl = WordNetLemmatizer()
+        def __call__(self, articles):
+            return [self.wnl.lemmatize(t) for t in word_tokenize(articles)]
 
     cv = CountVectorizer(stop_words=stop_words, ngram_range=(1,1), tokenizer=LemmaTokenizer())
     data_cv = cv.fit_transform(result.Reviews)
@@ -261,9 +261,13 @@ def etl(**cfg):
 
     # TODO - 
     # 1. write a line that creates a new folder called 'data' (just like in 180A)
-    # 2. instead of returning df and target, 
-    #    output them to subfolder(s) of that new 'data' folder
-    # note - instead of hardcoding the new folders' filepaths, 
-    #       get them from cfg['outpath']. (I've already added this param to get-data.json)
+    
+    outdir = cfg['outdir'] # 'data/raw'
+    if outdir and not os.path.exists(outdir):
+        os.makedirs(outdir)
+    
+    # 2. output the df to data/raw as 'df.csv'
+    #    and the target restaurant's yelp ID to data/raw as 'input_listing.txt' 
+   
 
     return df, target

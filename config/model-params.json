@@ -1,4 +1,8 @@
 {
-    "indir": "data/raw",
-    "metapaths_outpath": "data/metapaths"
+    "indir": "data/raw/",
+    "input_listing": "data/raw/input_listing.txt",
+    "metapath": "CAC",
+    "N": 50,
+    "top_n": 10,
+    "outdir": "data/out/"
 }
