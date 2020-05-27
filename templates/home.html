@@ -11,25 +11,34 @@
   <body>
     {% extends "template.html" %}
     {% block content %}
-    
-  <div class="center-on-page">  
-    
-    <h1> Restaurant Finder: </h1>
-    
-    <form class="form-inline" method="POST" action="{{ url_for('result') }}">
-        
-        <div class="select">
-            <select name="comp_select" class="selectpicker form-control">
-                
-                {% for o in data %}
-                
-                <option value="{{ o.name }}">{{ o.name }}</option>
-                
-                {% endfor %}
 
-            </select>
-        </div>
+
+
+    <div class="center-on-page">  
+    <h1> Restaurant Finder </h1>
+    
+    <br/>
+
+    <form class="form-inline" action="{{ url_for('result') }}" method="POST">
+      <div class="ml-container">
+
+        <form action="{{ url_for('result')}}" method="POST">
+        <p>Enter Restaurant Name Here</p>
+        <!-- <input type="text" name="comment"/> -->
+        <textarea name="comment" rows="2" cols="50"></textarea>
+        <br/>
+    
+        
         <button type="submit" class="btn">Go</button>
+
+        
+      </form>
+  
+      </div>
+   
+        
+       
+        
 
         {% endblock %}
   

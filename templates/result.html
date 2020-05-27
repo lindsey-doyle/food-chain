@@ -7,17 +7,14 @@
 <div class="center-on-page">
 
     <h1> Results: </h1>
+</br>
     
     {% for d in data %}
     
-    {% set my_string = "static/img/" + d['image'][0]['icon']+ ".svg" %}
+    {% set my_string = "my_string: " + d['Name'] %}
 
-    <h1>  
-        <img src="{{ my_string }}" class="svg" fill="white" height="100" vertical-align="middle" width="100"> 
-    </h1>  
-
-
-    <h1>{{ d['Rating']}}</h1>
+    <p >{{ d['Name']}} -  Rating: {{ d['Rating'] }}</p>
+    
     
     {% endfor %}
 
