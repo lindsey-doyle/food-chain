@@ -3,6 +3,8 @@
 from flask import Flask
 from flask import render_template, url_for, request
 
+import pprint as pp
+
 import pandas as pd
 
 ######
@@ -40,8 +42,7 @@ def home():
                                         {'name':'Option 1'},
                                         {'name':'Option 2'}, 
                                         {'name':'Option 3'}, 
-                                        {'name':'etc.'}
-                                        ])
+                                        {'name':'etc.'}])
 
 
 @app.route("/result", methods=['GET', 'POST'])
@@ -50,17 +51,22 @@ def result():
     error = None
     
     if request.method == 'POST':
-        	#comment = request.form['comment']
-		#data = [comment]
-		#vect = cv.transform(data).toarray()
-		#my_prediction = clf.predict(vect)
+        listing = request.form['listing']
+        listing = listing.split(",")
+        print(listing)
+		
+
+
+
         my_prediction = 0
         #data = [{'name':'Option 1'}, {'name':'Option 2'}, {'name':'etc.'}]
 
+
+        # DISPLAY RECOMMENDATIONS
         df = pd.read_csv('test/test_data/out/recommendations.csv')
-        data2 = []
-        for restaurant in list(df['Name']):
-            data2.append({'Name': restaurant})
+        #data2 = []
+        #for restaurant in list(df['Name']):
+            #data2.append({'Name': restaurant})
 
         dct = df.transpose().to_dict()
         data = []
@@ -78,7 +84,8 @@ def result():
             #error = 'Bad Response from API'
             
     
-    return render_template('result.html', prediction = my_prediction, data=data, error=error)
+    return render_template('result.html', 
+                            prediction=my_prediction, data=data, error=error)
 
 @app.route("/about")
 def about():

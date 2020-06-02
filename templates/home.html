@@ -19,20 +19,19 @@
     
     <br/>
 
-    <form class="form-inline" action="{{ url_for('result') }}" method="POST">
+    <!--<form class="form-inline" action="{{ url_for('result') }}" method="POST">-->
       <div class="ml-container">
 
         <form action="{{ url_for('result')}}" method="POST">
         <p>Enter Restaurant Name Here</p>
         <!-- <input type="text" name="comment"/> -->
-        <textarea name="comment" rows="2" cols="50"></textarea>
+        <textarea name="listing" rows="2" cols="50"></textarea>
         <br/>
     
+        <input type="submit" class="btn-info" value="Go">
+        <!--<button type="submit" class="btn-info">Go</button>-->
         
-        <button type="submit" class="btn">Go</button>
-
-        
-      </form>
+        </form>
   
       </div>
    
