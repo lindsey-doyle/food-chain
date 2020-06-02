@@ -41,24 +41,30 @@ def verify_listing(name, location, api):
     if response.status_code!=200:
             print('Error: response status code not 200')
             sys.exit(0)
+    
     business_data = response.json()
-    found = False
     businesses = (x for x in business_data['businesses'])
+    #print([x['name'] for x in business_data['businesses']])
+
     # This loop iterates through to verify the correct listing with the user
+    nxt = next(businesses) ##!!!!!!!!!!!
+    found = True ##!!!!!!!!!!!!
     while found == False:
         nxt = next(businesses)
+        print(nxt)
         # Prompt user
         inp = input("Is this the correct listing?: "+nxt['name']+" (Y/n)")
         if inp.lower() == 'y':
             found = True
+    
     # This prompts the user to select the index corresponding to the correct listing
     cats = []
     for i in range(len(nxt['categories'])):
         cats += [nxt['categories'][i]['title']]
-    print(cats)
-    #inp = input("What is the index of the correct category?")
-    inp = input("What is the index of the category you are interested in?")
-    cat = cats[int(inp)]
+    #print("cats:", cats)
+    #inp = input("What is the index of the category you are interested in?") # "Select a Category"
+    #cat = cats[int(inp)]
+    cat = cats[0] ##!!!!!!!!!!!
     return nxt, cat
 
 
@@ -115,8 +121,10 @@ def etl(**cfg):
     HEADERS = {'Authorization': 'bearer %s' % API}
     ENDPOINT = 'https://api.yelp.com/v3/businesses/search'
     
-    name, location = get_input()
-    nxt, cat = verify_listing(name, location, API)
+    name, location = cfg['listing_name'], cfg['listing_city'] #name, location = get_input()
+    
+    #nxt, cat = verify_listing(name, location, API)
+    nxt, cat = cfg['listing_info'], cfg['listing_cat']
     count = 0
 
     #Initialize lists for collecting data
@@ -262,22 +270,18 @@ def etl(**cfg):
 
     df = result[result['Name']!=nxt['name']]
     target = result[result['Name']==nxt['name']]
+    #print(target)
 
-    # TODO - 
-    # 1. write a line that creates a new folder called 'data' (just like in 180A)
-    
+    # Populate 'data/raw/raw.csv' 
     outdir = cfg['outdir'] # 'data/raw'
     if outdir and not os.path.exists(outdir):
         os.makedirs(outdir)
+
+    df.to_csv('data/raw/raw.csv')
     
-    # 2. output the df to data/raw as 'df.csv'
-    #    and the target restaurant's yelp ID to data/raw as 'input_listing.txt' 
-    df.to_csv('data/raw/df.csv')
-    
-    print(target)
     # data/raw/input_listing.txt'
-    with open('data/raw/input_listing.txt', 'w') as f:
-        f.write('ID_goes_here')
+    #with open('data/raw/input_listing.txt', 'w') as f:
+        #f.write('ID_goes_here')
    
     
     #return df, target

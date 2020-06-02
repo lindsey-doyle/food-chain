@@ -17,7 +17,7 @@ import pickle
 
 sys.path.insert(0, 'src') # add library code to path
 
-from get_data import etl
+from get_data import etl, verify_listing
 from model import driver 
 
 DATA_PARAMS = 'config/data-params.json'
@@ -31,7 +31,6 @@ def load_params(fp):
     return param
 
 ######
-
 
 # create app instance
 app = Flask(__name__)
@@ -53,14 +52,42 @@ def result():
     if request.method == 'POST':
         listing = request.form['listing']
         listing = listing.split(",")
-        print(listing)
+        #print(listing)
+        # TODO - confirm valid input
+        listing_name = listing[0].strip()
+        listing_city = listing[1].strip()
+        # TODO - confirm valid input
+
+        ##!!!!!!!(api key)
+        api = "ds5abV86lpgzBp767VpgjncvxHLDI64ZqZQABokWL-sRtu6II83zKSLuvhxZNEaHJ_tJ5aUFJRdlIMGnudVKQv61YUkS_vq8AuGeJOz9oPGfyvELw3rDVAVyUWdpXXYx"
+        
+        nxt, cat = verify_listing(listing_name, listing_city, api)
+        #print(nxt) # 'nxt' is dict of info of the verified input listing 
+        print('/n', '/n', nxt)
+
+
+
+        # Update config with inputs
+        with open("config/data-params.json", "r") as fp:
+            params = json.load(fp)
+            #params.update(new_data)
+        params["listing_name"] = listing_name #listing[0].strip()
+        params["listing_city"] = listing_city #listing[1].strip()
+        params["listing_cat"] = cat
+        params["listing_info"] = nxt
+        
+        with open("config/data-params.json", "w") as fp:
+            json.dump(params, fp)
 		
+        # TODO - confirm valid config before moving on!
 
+        # Get Data (ETL)
+        cfg = load_params(DATA_PARAMS)
+        etl(**cfg)
 
+        # Model
 
-        my_prediction = 0
-        #data = [{'name':'Option 1'}, {'name':'Option 2'}, {'name':'etc.'}]
-
+        # Get results
 
         # DISPLAY RECOMMENDATIONS
         df = pd.read_csv('test/test_data/out/recommendations.csv')
@@ -72,8 +99,6 @@ def result():
         data = []
         for val in dct.values():
             data.append(val)
-
-    
     #select = request.form.get('comp_select')
 
     #resp = query_api(select)
@@ -83,7 +108,8 @@ def result():
         #if len(data) != 2:
             #error = 'Bad Response from API'
             
-    
+    my_prediction = 0
+    #data = [{'name':'Option 1'}, {'name':'Option 2'}, {'name':'etc.'}]
     return render_template('result.html', 
                             prediction=my_prediction, data=data, error=error)
 
