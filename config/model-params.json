@@ -1,8 +1,1 @@
-{
-    "indir": "data/data_ingestion.csv",
-    "input_listing": "data/raw/input_listing.txt",
-    "metapath": "CAC",
-    "N": 50,
-    "top_n": 10,
-    "outdir": "data/out/"
-}
+{"indir": "data/data_ingestion.csv", "listing_id": "n3sKOKoEk_gKhBvgfIwZaA", "metapath": "CAC", "N": 50, "top_n": 5, "outdir": "data/out/"}

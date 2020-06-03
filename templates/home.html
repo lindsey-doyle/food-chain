@@ -16,21 +16,39 @@
 
     <div class="center-on-page">  
     <h1> Restaurant Finder </h1>
+    <p> Welcome! Which restaurant would you like to use today? </p>
     
     <br/>
 
     <!--<form class="form-inline" action="{{ url_for('result') }}" method="POST">-->
-      <div class="ml-container">
+      <!--<div class="ml-container">-->
 
         <form action="{{ url_for('result')}}" method="POST">
-        <p>Enter Restaurant Name Here</p>
-        <!-- <input type="text" name="comment"/> -->
-        <textarea name="listing" rows="2" cols="50"></textarea>
+        <p style="color:white; font-size: small;">Restaurant Name:</p>
+        <!-- <input type="text" name="listing"/> -->
+        <textarea name="listing" rows="1" cols="30"></textarea>
         <br/>
-    
+        <p style="color:white; font-size: small;" >Location (City):</p>
+        <textarea name="city" rows="1" cols="30"></textarea>
+        <br/>
+
+        <div class="select">
+          <select name="comp_select" class="selectpicker form-control">
+
+              {% for o in data %}
+
+              <option value="{{ o.name }}">{{ o.name }}</option>
+
+              {% endfor %}
+
+          </select>
+        </div>
+
+
         <input type="submit" class="btn-info" value="Go">
         <!--<button type="submit" class="btn-info">Go</button>-->
         
+    
         </form>
   
       </div>

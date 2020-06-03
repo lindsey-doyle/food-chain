@@ -347,10 +347,8 @@ def get_recommendations(ps, df, input_restaurant, metapath, N, top_n):
 def driver(**cfg):
 
     # get Yelp ID of input restaurant
-    fname = cfg['input_listing']
-    f = open(fname, 'r')
-    input_restaurant = f.read() # Yelp ID 
-
+    input_restaurant = cfg['listing_id']
+   
     # get metapath to use
     metapath = cfg['metapath']
 
