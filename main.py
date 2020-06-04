@@ -130,7 +130,7 @@ def result():
     my_prediction = 0
     #data = [{'name':'Option 1'}, {'name':'Option 2'}, {'name':'etc.'}]
     return render_template('result.html', 
-                            prediction=my_prediction, data=data, error=error)
+                            prediction=my_prediction, data=data, num=len(data), error=error)
 
 @app.route("/about")
 def about():

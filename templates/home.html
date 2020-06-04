@@ -23,17 +23,23 @@
     <!--<form class="form-inline" action="{{ url_for('result') }}" method="POST">-->
       <!--<div class="ml-container">-->
 
-        <form action="{{ url_for('result')}}" method="POST">
-        <p style="color:white; font-size: small;">Restaurant Name:</p>
-        <!-- <input type="text" name="listing"/> -->
-        <textarea name="listing" rows="1" cols="30"></textarea>
-        <br/>
-        <p style="color:white; font-size: small;" >Location (City):</p>
-        <textarea name="city" rows="1" cols="30"></textarea>
-        <br/>
+       
 
-        <div class="select">
-          <select name="comp_select" class="selectpicker form-control">
+        
+        
+        <form action="{{ url_for('result')}}" method="POST">
+          
+          <p style="color:white; font-size: small;">Restaurant Name:</p>
+          <!-- <input type="text" name="listing"/> -->
+          <textarea name="listing" rows="1" cols="30"></textarea>
+          <br/>
+          
+          <p style="color:white; font-size: small;" >Location (City):</p>
+          <textarea name="city" rows="1" cols="30"></textarea>
+          <br/>
+
+          
+            <select name="comp_select" class="selectpicker form-control">
 
               {% for o in data %}
 
@@ -41,15 +47,14 @@
 
               {% endfor %}
 
-          </select>
-        </div>
-
+            </select>
+       
 
         <input type="submit" class="btn-info" value="Go">
         <!--<button type="submit" class="btn-info">Go</button>-->
         
-    
         </form>
+  
   
       </div>
    

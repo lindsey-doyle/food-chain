@@ -1,21 +1,34 @@
 <!doctype html>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
-<li><a style="color:white; font-size: x-small;" href="{{ url_for('home') }}">Home</a></li>
-<li><a style="color:white; font-size: x-small;" href="{{ url_for('about') }}">About</a></li>
+<html lang="en" dir="ltr">
+  
+  <head>
+    <meta charset="utf-8">
+    <title>Results</title>
+  </head>
+  
+  
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
 
-<div class="center-on-page">
 
-    <h1> Results: </h1>
+    <h1> Recommendations: </h1>
 </br>
-    
-    {% for d in data %}
-    
-    {% set my_string = "my_string: " + d['Name'] %}
 
-    <p >{{ d['Name']}} -  Rating: {{ d['Rating'] }}</p>
+    {% for i in range(0, num) %}
     
-    
+    <p style="align-content: flex-start;"> #{{i+1}} {{ data[i]['Name']}} ({{ data[i]['Rating'] }} stars) 
+        <a style="color:white; font-size: x-small;" href="{{ data[i]['URL']}}">  [view listing on Yelp]</a>
+    </p>
+  
     {% endfor %}
 
-</div>
+
+
+{% endblock %}
+
+</body>
+
+</html>
