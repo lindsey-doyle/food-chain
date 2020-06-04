@@ -4,7 +4,6 @@ from flask import Flask
 from flask import render_template, url_for, request
 
 import pprint as pp
-
 import pandas as pd
 
 ######
@@ -142,5 +141,5 @@ def example():
     return "another example page :)"
      
 
-#if __name__ == "__main__":
-    #app.run(debug=True)     
+if __name__ == "__main__":
+    app.run(debug=True)     
