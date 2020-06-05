@@ -36,6 +36,14 @@ META_DICT = {
     "CWC label": "CWC",  
     "CDCACDC label": "CDCACDC"}
 
+META_DICT = {
+            'Serve the same cuisine as your favorite restaurant': 'A',
+            'Are within a 15 minute driving distance from your favorite restaurant': 'D',
+            'Serve the same specialty items as your favorite restaurant': 'W',
+            'Have reviews that talk about the same food served at your favorite restaurant':'S',
+            'Are as popular as your favorite restaurant': 'R',
+            'Have the same overall satisfaction as your favorite restaurant': 'P'}
+
 # create app instance
 app = Flask(__name__)
 
@@ -84,9 +92,20 @@ def result():
         # Get Metapath Choice 
         #metapath_key = request.form.get('comp_select')
         checked = request.form.getlist('mycheckbox')
-        print(checked)
+        mtrx_lst = []
+        for m in checked:
+            mtrx_lst.append(META_DICT[m])
 
-        metapath = "CWC" #META_DICT[metapath_key]
+        print(mtrx_lst)
+
+        def get_metapath(lets):
+            mid = "C".join(lets)
+            res = 'C' + mid 
+            return res + res[-2::-1]
+
+        metapath = get_metapath(mtrx_lst)
+        print(metapath)
+        #metapath = "CWC" 
 
 
         # Update data-params 
@@ -101,15 +120,6 @@ def result():
         
         with open("config/data-params.json", "w") as fp:
             json.dump(params, fp)
-		
-        # TODO - confirm valid config before moving on!
-
-        # Get Data (ETL)
-        cfg = load_params(DATA_PARAMS)
-        etl(**cfg)
-        print('ETL Complete.')
-
-        ##### MODELING PIPELINE
 
         # Update model-params 
         with open("config/model-params.json", "r") as fp:
@@ -119,6 +129,15 @@ def result():
         m_params["metapath"] = metapath
         with open("config/model-params.json", "w") as fp:
             json.dump(m_params, fp)
+		
+        # TODO - confirm valid config before moving on!
+
+        # Get Data (ETL)
+        #cfg = load_params(DATA_PARAMS)
+        #etl(**cfg)
+        #print('ETL Complete.')
+
+        
 
         # Run model driver
         # NOTE!! - instead call 'run.py' with 'model' target!!??

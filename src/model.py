@@ -335,7 +335,7 @@ def get_recommendations(ps, df, input_restaurant, metapath, N, top_n):
 
     # Now display which restaurants were the most similar to the input restaurant by 
     # returning a dataframe 
-    top_ten = list(sorted_results.keys())[:top_n]
+    top_ten = list(sorted_results.keys())[1:top_n+1]
     recommendations_df = df[['Name', 'URL', 'Rating', 'Review Count']][df['Yelp ID'].isin(top_ten)]
 
     return recommendations_df

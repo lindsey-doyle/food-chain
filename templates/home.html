@@ -31,17 +31,17 @@
           <p style="color:white; font-size: small;" >Location (city):</p>
           <textarea name="city" rows="1" cols="30"></textarea>
           <br/>
-
-          
-            <!--<select name="comp_select" class="selectpicker form-control">
+            <!--<select name="comp_select" class="selectpicker form-control">-->
+          <p style="color:white; font-size: small;" >Would you like to find restaurants that...</p>
 
               {% for o in data %}
 
-              <option value="{{ o.name }}">{{ o.name }}</option>
+              <p style="color:white; font-size: small;"> {{ o.name }}?
+                <input type="checkbox" value="{{ o.name }}" name="mycheckbox"></p>
 
               {% endfor %}
 
-            </select>-->
+            <!--</select>-->
 
             <!--<form action="/" method="POST" >
               Checkbox A<input type="checkbox" value="A" name="mycheckbox">
@@ -49,14 +49,14 @@
               Checkbox C<input type="checkbox" value="C" name="mycheckbox">
               <!--<input type="submit">
           </form>-->
-             <p style="color:white; font-size: small;"> Checkbox A
+             <!--<p style="color:white; font-size: small;"> Checkbox A
              <input type="checkbox" value="A" name="mycheckbox"></p>
 
              <div style="color:white; font-size: small;"> Checkbox B 
              <input type="checkbox" value="B" name="mycheckbox"></div>
 
              <p style="color:white; font-size: small;"> Checkbox C 
-             <input type="checkbox" value="C" name="mycheckbox"></p>
+             <input type="checkbox" value="C" name="mycheckbox"></p>-->
 
         <input type="submit" class="btn-info" value="Go">
         <!--<button type="submit" class="btn-info">Go</button>-->

@@ -216,7 +216,7 @@ def etl(**cfg):
             return [self.wnl.lemmatize(t) for t in word_tokenize(articles)]
 
     cv = CountVectorizer(stop_words=stop_words, ngram_range=(1,1), tokenizer=LemmaTokenizer())
-    data_cv = cv.fit_transform(result.Reviews)
+    data_cv = cv.fit_transform(result.Reviews) # error 
     data_dtm = pd.DataFrame(data_cv.toarray(), columns=cv.get_feature_names())
     data_dtm.index = result['Yelp ID']
 
