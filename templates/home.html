@@ -5,28 +5,22 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Habits</title>
+    <title>Home</title>
   </head>
   
-  <body>
+  <!--<body>-->
     {% extends "template.html" %}
     {% block content %}
 
-
-
-    <div class="center-on-page">  
+    <!--<div class="center-on-page">  -->
     <h1> Restaurant Finder </h1>
-    <p> Welcome! Which restaurant would you like to use today? </p>
+    <p> Which restaurant would you like to use today? </p>
     
     <br/>
 
     <!--<form class="form-inline" action="{{ url_for('result') }}" method="POST">-->
       <!--<div class="ml-container">-->
-
-       
-
-        
-        
+      
         <form action="{{ url_for('result')}}" method="POST">
           
           <p style="color:white; font-size: small;">Restaurant Name:</p>
@@ -34,12 +28,12 @@
           <textarea name="listing" rows="1" cols="30"></textarea>
           <br/>
           
-          <p style="color:white; font-size: small;" >Location (City):</p>
+          <p style="color:white; font-size: small;" >Location (city):</p>
           <textarea name="city" rows="1" cols="30"></textarea>
           <br/>
 
           
-            <select name="comp_select" class="selectpicker form-control">
+            <!--<select name="comp_select" class="selectpicker form-control">
 
               {% for o in data %}
 
@@ -47,8 +41,22 @@
 
               {% endfor %}
 
-            </select>
-       
+            </select>-->
+
+            <!--<form action="/" method="POST" >
+              Checkbox A<input type="checkbox" value="A" name="mycheckbox">
+              Checkbox B<input type="checkbox" value="B" name="mycheckbox">
+              Checkbox C<input type="checkbox" value="C" name="mycheckbox">
+              <!--<input type="submit">
+          </form>-->
+             <p style="color:white; font-size: small;"> Checkbox A
+             <input type="checkbox" value="A" name="mycheckbox"></p>
+
+             <div style="color:white; font-size: small;"> Checkbox B 
+             <input type="checkbox" value="B" name="mycheckbox"></div>
+
+             <p style="color:white; font-size: small;"> Checkbox C 
+             <input type="checkbox" value="C" name="mycheckbox"></p>
 
         <input type="submit" class="btn-info" value="Go">
         <!--<button type="submit" class="btn-info">Go</button>-->
@@ -56,15 +64,12 @@
         </form>
   
   
-      </div>
+      <!--</div>-->
    
         
-       
+
         
+      {% endblock %}
+      <!--</body>-->
 
-        {% endblock %}
-  
-      </body>
-
- 
 </html>

@@ -30,22 +30,28 @@ def load_params(fp):
     return param
 
 ######
-META_DICT = {"CAC label": "CAC", "CWC label": "CWC",  "CDCACDC label": "CDCACDC"}
+
+META_DICT = {
+    "CAC label": "CAC", 
+    "CWC label": "CWC",  
+    "CDCACDC label": "CDCACDC"}
 
 # create app instance
 app = Flask(__name__)
 
-@app.route("/")  # endpoint "/" (home page)
+@app.route("/", methods=['GET', 'POST'])
 def home():
     
     boxes = []
-
     for label in META_DICT.keys():
         d = {}
         d['name'] = label
         boxes.append(d) 
         
     # boxes = [{'name': "CAC label"}, {'name': "CWC label"}]
+    #if request.method == 'POST': 
+        #print(request.form.getlist('mycheckbox'))
+        #return 'Done'
 
     return render_template("home.html", data=boxes)
 
@@ -69,13 +75,18 @@ def result():
         listing_city = city.strip()
 
         # TODO - confirm valid input
+        if (len(listing_name) < 1) or (len(listing_name) < 1):
+            return "No restaurant entered."
 
         # Get listing info and category from Yelp 
         nxt, cat = verify_listing(listing_name, listing_city, api) # 'nxt' is dict of info of the verified input listing 
 
         # Get Metapath Choice 
-        metapath_key = request.form.get('comp_select')
-        metapath = META_DICT[metapath_key]
+        #metapath_key = request.form.get('comp_select')
+        checked = request.form.getlist('mycheckbox')
+        print(checked)
+
+        metapath = "CWC" #META_DICT[metapath_key]
 
 
         # Update data-params 
