@@ -30,55 +30,59 @@ def load_params(fp):
     return param
 
 ######
+META_DICT = {"CAC label": "CAC", "CWC label": "CWC",  "CDCACDC label": "CDCACDC"}
 
 # create app instance
 app = Flask(__name__)
 
 @app.route("/")  # endpoint "/" (home page)
 def home():
-    #metapaths = [{'name': 'CAC', 'name': 'etc.'}]                    
-    return render_template("home.html", data=[
-                                        {'name':'Metapath Option 1'},
-                                        {'name':'Option 2'}, 
-                                        {'name':'Option 3'}, 
-                                        {'name':'etc.'}])
+    
+    boxes = []
+
+    for label in META_DICT.keys():
+        d = {}
+        d['name'] = label
+        boxes.append(d) 
+        
+    # boxes = [{'name': "CAC label"}, {'name': "CWC label"}]
+
+    return render_template("home.html", data=boxes)
 
 
 @app.route("/result", methods=['GET', 'POST'])
 def result():
     #data = []
-    meta_dict = {'Metapath Option 1': "CAC", 'Option 2': "CAC",  'Option 3': "CAC",  'etc.': "CAC"}
+    #meta_dict = {"CAC label": "CAC", "CWC label": "CWC",  "CDCACDC label": "CDCACDC"}
     error = None
     
     if request.method == 'POST':
-        listing = request.form['listing']
-        city = request.form['city']
-
-        metapath_key = request.form.get('comp_select')
-        metapath = meta_dict[metapath_key]
-
-        #print(listing)
-        # TODO - confirm valid input
-        listing_name = listing.strip()
-        listing_city = city.strip()
-
-        #listing_name = listing[0].strip()
-        #listing_city = listing[1].strip()
-        # TODO - confirm valid input
-
+        
         ##!!!!!!!(api key)
         api = "ds5abV86lpgzBp767VpgjncvxHLDI64ZqZQABokWL-sRtu6II83zKSLuvhxZNEaHJ_tJ5aUFJRdlIMGnudVKQv61YUkS_vq8AuGeJOz9oPGfyvELw3rDVAVyUWdpXXYx"
         
-        nxt, cat = verify_listing(listing_name, listing_city, api)
-        #print(nxt) # 'nxt' is dict of info of the verified input listing 
-        #print('/n', '/n', nxt)
+        # Get restaurant Name and Location
+        listing = request.form['listing']
+        listing_name = listing.strip()
+
+        city = request.form['city']
+        listing_city = city.strip()
+
+        # TODO - confirm valid input
+
+        # Get listing info and category from Yelp 
+        nxt, cat = verify_listing(listing_name, listing_city, api) # 'nxt' is dict of info of the verified input listing 
+
+        # Get Metapath Choice 
+        metapath_key = request.form.get('comp_select')
+        metapath = META_DICT[metapath_key]
 
 
-
-        # Update config with inputs
+        # Update data-params 
         with open("config/data-params.json", "r") as fp:
             params = json.load(fp)
             #params.update(new_data)
+        
         params["listing_name"] = listing_name 
         params["listing_city"] = listing_city
         params["listing_cat"] = cat
@@ -94,7 +98,8 @@ def result():
         #etl(**cfg)
 
         ##### MODELING PIPELINE
-        # Update model-params with input listing ID
+
+        # Update model-params 
         with open("config/model-params.json", "r") as fp:
             m_params = json.load(fp)
         
