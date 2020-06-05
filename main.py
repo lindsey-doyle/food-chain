@@ -105,8 +105,9 @@ def result():
         # TODO - confirm valid config before moving on!
 
         # Get Data (ETL)
-        #cfg = load_params(DATA_PARAMS)
-        #etl(**cfg)
+        cfg = load_params(DATA_PARAMS)
+        etl(**cfg)
+        print('ETL Complete.')
 
         ##### MODELING PIPELINE
 

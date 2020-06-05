@@ -10,10 +10,14 @@ import sys
 import re
 import string
 from sklearn.feature_extraction import text
+#import nltk
 from nltk import word_tokenize          
 from nltk.stem import WordNetLemmatizer 
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
+#import pickle
+
+#nltk.download()
 
 
 def get_input():
@@ -238,7 +242,11 @@ def etl(**cfg):
 
     stop_words = text.ENGLISH_STOP_WORDS.union(add_stop_words)
     cv = CountVectorizer(stop_words=stop_words, ngram_range=(1,1), tokenizer=LemmaTokenizer())
+    #try:
     data_cv = cv.fit_transform(result.Reviews)
+    #except:
+        #mport nltk
+        #nltk.download('p')
     data_dtm = pd.DataFrame(data_cv.toarray(), columns=cv.get_feature_names())
     data_dtm.index = result['Yelp ID']
     
