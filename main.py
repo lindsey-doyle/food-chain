@@ -18,15 +18,7 @@ from model import driver
 DATA_PARAMS = 'config/data-params.json'
 MODEL_PARAMS = 'config/model-params.json'
 TEST_PARAMS = 'config/test-params.json'
-
 ENV = 'config/env.json'
-
-def load_params(fp):
-    with open(fp) as fh:
-        param = json.load(fh)
-
-    return param
-
 META_DICT = {
             'Serve the same cuisine as your favorite restaurant': 'A',
             'Are within a 15 minute driving distance from your favorite restaurant': 'D',
@@ -34,6 +26,21 @@ META_DICT = {
             'Have reviews that talk about the same food served at your favorite restaurant':'S',
             'Are as popular as your favorite restaurant': 'R',
             'Have the same overall satisfaction as your favorite restaurant': 'P'}
+
+def load_params(fp):
+    with open(fp) as fh:
+        param = json.load(fh)
+    return param
+
+def get_metapath(mtrx_lst):
+            """ 
+            Generates metapath from list of relationship types.
+            :param: mtrx_lst: list of relationship types
+            :return: metapath as a string 
+            """
+            mid = "C".join(mtrx_lst)
+            res = "C" + mid 
+            return res + res[-2::-1]
 
 # create app instance
 app = Flask(__name__)
@@ -78,19 +85,8 @@ def result():
         mtrx_lst = []
         for m in checked:
             mtrx_lst.append(META_DICT[m])
-
-        def get_metapath(mtrx_lst):
-            """ 
-            Generates metapath from list of relationship types.
-            :param: mtrx_lst: list of relationship types
-            :return: metapath as a string 
-            """
-            mid = "C".join(mtrx_lst)
-            res = "C" + mid 
-            return res + res[-2::-1]
-
         metapath = get_metapath(mtrx_lst)
-        print(metapath)
+        #print(metapath)
 
         # Update data-params 
         with open("config/data-params.json", "r") as fp:
@@ -132,11 +128,6 @@ def result():
 @app.route("/about")
 def about():
     return render_template("about.html")
-
-@app.route("/example")
-def example():
-    return "another example page :)"
      
-
 if __name__ == "__main__":
     app.run(debug=True)     
