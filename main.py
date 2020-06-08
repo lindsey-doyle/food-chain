@@ -9,6 +9,7 @@ import json
 import shutil
 import time
 import pickle
+from flask_bootstrap import Bootstrap
 
 sys.path.insert(0, 'src') # add library code to path
 
@@ -44,6 +45,7 @@ def get_metapath(mtrx_lst):
 
 # create app instance
 app = Flask(__name__)
+Bootstrap(app)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -55,7 +57,6 @@ def home():
         boxes.append(d) 
 
     return render_template("home.html", data=boxes)
-
 
 @app.route("/result", methods=['GET', 'POST'])
 def result():

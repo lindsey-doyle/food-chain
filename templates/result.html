@@ -1,32 +1,34 @@
 <!doctype html>
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/slate/bootstrap.min.css" 
+  rel="stylesheet" integrity="sha384-idNH3UIOiZbCf8jxqu4iExnH34y5UovfW/Mg8T5WfNvoJolDvknoNqR69V2OexgF" 
+  crossorigin="anonymous">
+  
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
 <html lang="en" dir="ltr">
-  
+  {% extends "template.html" %}
   <head>
     <meta charset="utf-8">
-    <title>Results</title>
+    <title> {% block title %} Results {% endblock %} </title>
   </head>
   
-  
   <body>
-    {% extends "template.html" %}
-    {% block content %}
 
+    {% block content %}
+    <div class="jumbotron">
 
     <h1> Recommendations: </h1>
 </br>
 
     {% for i in range(0, num) %}
     
-    <p style="align-content: flex-start;"> #{{i+1}} {{ data[i]['Name']}} ({{ data[i]['Rating'] }} stars) 
+    <p> #{{i+1}} {{ data[i]['Name']}} ({{ data[i]['Rating'] }} stars) 
         <a style="color:white; font-size: x-small;" href="{{ data[i]['URL']}}">  [view listing on Yelp]</a>
     </p>
   
     {% endfor %}
 
-
-
+    </div>
 {% endblock %}
 
 </body>

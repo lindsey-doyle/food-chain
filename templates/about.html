@@ -1,37 +1,34 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/slate/bootstrap.min.css" 
+  rel="stylesheet" integrity="sha384-idNH3UIOiZbCf8jxqu4iExnH34y5UovfW/Mg8T5WfNvoJolDvknoNqR69V2OexgF" 
+  crossorigin="anonymous">
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
 
 <html lang="en" dir="ltr">
+  {% extends "template.html" %}
   <head>
     <meta charset="utf-8">
-    <title>About Us</title>
+    <title> {% block title %} About Us {% endblock %} </title>
   </head>
 
-
   <body>
-    {% extends "template.html" %}
     {% block content %}
-
+    <div class="jumbotron">
+  
     <h1> What we're all about. </h1>
-
+   
     <p style="color:white; font-size: small; margin-left: 10em; margin-right: 10em;">Our goal is to develop a user-customizable, similarity-based restaurant recommendation system, so that you can decide for yourself what matters most. </p>
 
-    <iframe width="550" height="400" src="https://prezi.com/view/ZHyzEUbAjfRElKuvh2j0/embed" webkitallowfullscreen="1" mozallowfullscreen="1" allowfullscreen="1"></iframe>
-
-    <!--<p style="color:white; font-size: small;"> View our interactive presentation demo: <a style="color:white; font-size: x-small;" href="https://github.com/lpdoyle/Habits">github.com/lpdoyle/Habits</a> </p>-->
-
-    <!--<h1>
-      <img src="static/img/viz2.png"  >
-
-    </h1>
-    <p style="color:white; font-size: x-small; margin-left: 10em; margin-right: 10em;"> Generating these personalized recommendations is a multi-stage process. We first take information provided by the user in order to establish a location of reference. This data is obtained through the utlization of Yelp's API. We next structure this information in a manner which allows us to easily specify how we search for similarity. From the organized data, we then search for restuarants which are the most similar based on the user specified inputs designated earlier. We then display our search results to the user so that the user can inspect their new restaurant options.</p>
-
-    <h1><img src="static/img/viz1.png" ></h1>-->
-
+    <iframe width="550" height="400" src="https://prezi.com/view/ZHyzEUbAjfRElKuvh2j0/embed" webkitallowfullscreen="1" mozallowfullscreen="1" allowfullscreen="1" ></iframe>
 
     <p style="color:white; font-size: small;"> Project code: <a style="color:white; font-size: x-small;" href="https://github.com/lpdoyle/Habits">github.com/lpdoyle/Habits</a> </p>
     <p style="color:white; font-size: small;">by Lindsey Doyle, Daniel Hartmann, and David Thierry.</p>
+  
+  </div>
+    
     {% endblock %}
 
   </body>

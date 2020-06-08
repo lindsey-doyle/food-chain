@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
 <html lang="en" dir="ltr">
-
+  {% extends "template.html" %}
   <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/slate/bootstrap.min.css" 
+  rel="stylesheet" integrity="sha384-idNH3UIOiZbCf8jxqu4iExnH34y5UovfW/Mg8T5WfNvoJolDvknoNqR69V2OexgF" 
+  crossorigin="anonymous">
+  
     <meta charset="utf-8">
-    <title>Home</title>
+    <title> {% block title %} Home {% endblock %} </title>
   </head>
   
-  <!--<body>-->
-    {% extends "template.html" %}
+  <body>
+ 
     {% block content %}
+    <div class="jumbotron">
 
     <!--<div class="center-on-page">  -->
     <h1> Restaurant Finder </h1>
@@ -59,7 +63,7 @@
              <p style="color:white; font-size: small;"> Checkbox C 
              <input type="checkbox" value="C" name="mycheckbox"></p>-->
 
-        <input type="submit" class="btn-info" value="Go">
+        <input type="submit" class="btn btn-primary" value="Go">
         <!--<button type="submit" class="btn-info">Go</button>-->
         
         </form>
@@ -68,9 +72,9 @@
       <!--</div>-->
    
         
-
+    </div>
         
       {% endblock %}
-      <!--</body>-->
-
+      
+      </body>
 </html>
