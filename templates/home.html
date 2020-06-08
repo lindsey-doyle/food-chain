@@ -36,8 +36,9 @@
 
               {% for o in data %}
 
-              <p style="color:white; font-size: small;"> {{ o.name }}?
-                <input type="checkbox" value="{{ o.name }}" name="mycheckbox"></p>
+              <p style="color:white; font-size: small;text-align: left;align-content: center;"> 
+                <input type="checkbox" value="{{ o.name }}" name="mycheckbox">
+                {{ o.name }}?</p>
 
               {% endfor %}
 
