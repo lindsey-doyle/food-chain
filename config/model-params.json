@@ -1,1 +1,1 @@
-{"indir": "test/test_data/raw/data_ingestion.csv", "listing_id": "n3sKOKoEk_gKhBvgfIwZaA", "metapath": "CACSCPCSCAC", "N": 50, "top_n": 5, "outdir": "data/out/"}
+{"indir": "test/test_data/raw/data_ingestion.csv", "listing_id": "n3sKOKoEk_gKhBvgfIwZaA", "metapath": "CAC", "N": 50, "top_n": 5, "outdir": "data/out/"}
