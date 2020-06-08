@@ -47,9 +47,6 @@ def main(targets):
     if 'test-project' in targets:
         cfg = load_params(TEST_PARAMS)
         driver(**cfg)
-    
-
-    #env = load_params(ENV)
 
     print('Finished in: {} seconds'.format(time.time() - start_time))
     return

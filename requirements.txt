@@ -24,6 +24,7 @@ requests==2.22.0
 scikit-learn==0.21.3
 scipy==1.4.1
 six==1.15.0
+textblob==0.15.3
 tqdm==4.36.1
 urllib3==1.25.9
 visitor==0.1.3

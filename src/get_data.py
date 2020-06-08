@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import numpy as np
 import time
+import os
 import pprint as pp
 from tqdm import tqdm
 import time
@@ -15,6 +16,7 @@ from nltk import word_tokenize
 from nltk.stem import WordNetLemmatizer 
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
+from textblob import TextBlob
 #import pickle
 
 #nltk.download()
@@ -117,7 +119,6 @@ def etl(**cfg):
     Takes in config file and ETLs the df of relevant data based on the user's
     input.
 
-    :param: api_key: a string containing the API key
     """
 
     #Store config data
@@ -206,8 +207,13 @@ def etl(**cfg):
     result.drop_duplicates(subset=['Name'], inplace=True)
     result['Reviews'] = result['Review1'] + ' ' + result['Review2'] + ' ' + result['Review3']
     result['Reviews'] = result['Reviews'].apply(lambda x: clean_text_round1(x))
+    
+    print("Raw data recieved from Yelp.")
+    print("Columns: ", list(result.columns))
+
     add_stop_words = []
     stop_words = text.ENGLISH_STOP_WORDS.union(add_stop_words)
+    print("len 'stop_words': ", len(stop_words))
 
     class LemmaTokenizer(object):
         def __init__(self):
@@ -216,7 +222,7 @@ def etl(**cfg):
             return [self.wnl.lemmatize(t) for t in word_tokenize(articles)]
 
     cv = CountVectorizer(stop_words=stop_words, ngram_range=(1,1), tokenizer=LemmaTokenizer())
-    data_cv = cv.fit_transform(result.Reviews) # error 
+    data_cv = cv.fit_transform(result.Reviews) 
     data_dtm = pd.DataFrame(data_cv.toarray(), columns=cv.get_feature_names())
     data_dtm.index = result['Yelp ID']
 
@@ -227,10 +233,10 @@ def etl(**cfg):
         top_dict[i]= list(zip(top.index, top.values))
 
     # Print top words to console
-    for yid, top_words in top_dict.items():
-        print(yid)
-        print(', '.join([word for word, count in top_words[0:14]]))
-        print('---')
+    #for yid, top_words in top_dict.items():
+        #print(yid)
+        #print(', '.join([word for word, count in top_words[0:14]]))
+        #print('---')
 
     # Let's first pull out the top 30 words for each comedian
     words = []
@@ -243,7 +249,7 @@ def etl(**cfg):
     stop_words = text.ENGLISH_STOP_WORDS.union(add_stop_words)
     cv = CountVectorizer(stop_words=stop_words, ngram_range=(1,1), tokenizer=LemmaTokenizer())
     #try:
-    data_cv = cv.fit_transform(result.Reviews)
+    data_cv = cv.fit_transform(result.Reviews) 
     #except:
         #mport nltk
         #nltk.download('p')
@@ -277,8 +283,7 @@ def etl(**cfg):
     result['Word5'] = word5
 
     df = result[result['Name']!=nxt['name']]
-    target = result[result['Name']==nxt['name']]
-    #print(target)
+    #target = result[result['Name']==nxt['name']]
 
     # Populate 'data/raw/raw.csv' 
     outdir = cfg['outdir'] # 'data/raw'
@@ -286,11 +291,5 @@ def etl(**cfg):
         os.makedirs(outdir)
 
     df.to_csv('data/raw/raw.csv')
-    
-    # data/raw/input_listing.txt'
-    #with open('data/raw/input_listing.txt', 'w') as f:
-        #f.write('ID_goes_here')
    
-    
-    #return df, target
     return
