@@ -323,7 +323,7 @@ def W_matrix_func(df, update_tuples):
 # ---------------------------------------------------------------------  
 
 def get_recommendations(ps, df, input_restaurant, metapath, N, top_n):
-    
+    #get_recommendations(ps, df, input_restaurant, metapath, N, top_n)
     results = {}
 
     for restaurant in df['Yelp ID']:
@@ -335,7 +335,7 @@ def get_recommendations(ps, df, input_restaurant, metapath, N, top_n):
 
     # Now display which restaurants were the most similar to the input restaurant by 
     # returning a dataframe 
-    top_ten = list(sorted_results.keys())[1:top_n+1]
+    top_ten = list(sorted_results.keys())[1:top_n+1] # TODO - make sure input is not in here
     recommendations_df = df[['Name', 'URL', 'Rating', 'Review Count']][df['Yelp ID'].isin(top_ten)]
 
     return recommendations_df
@@ -357,7 +357,7 @@ def driver(**cfg):
     top_n = cfg['top_n']
 
     # read in data 
-    fp = cfg['indir'] # 'path/to/df.csv'
+    fp = cfg['indir'] # 'data/raw/raw.csv'
     df = pd.read_csv(fp)
 
     # Create Matrices
@@ -384,8 +384,7 @@ def driver(**cfg):
     flat_labels = [y for x in labels for y in x]
 
     type_lists = {
-    'C': flat_labels,
-    'A': flat_labels,
+    'C': flat_labels
     }
 
     incidence_matrices = {
@@ -401,7 +400,9 @@ def driver(**cfg):
     # Create PathSim instance
     ps = PathSim(type_lists, incidence_matrices)
 
-    # generate recommendations
+    # get metapath to use
+    metapath = cfg['metapath']
+    # Generate recommendations
     recommendations_df = get_recommendations(ps, df, input_restaurant, metapath, N, top_n)
     
     # write recommendations to csv:

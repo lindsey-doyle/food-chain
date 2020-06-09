@@ -282,7 +282,8 @@ def etl(**cfg):
     result['Word4'] = word4
     result['Word5'] = word5
 
-    df = result[result['Name']!=nxt['name']]
+    #df = result[result['Name']!=nxt['name']]
+    df = result
     #target = result[result['Name']==nxt['name']]
 
     # Populate 'data/raw/raw.csv' 

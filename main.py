@@ -79,7 +79,9 @@ def result():
 
         # Get listing info and category from Yelp 
         env_cfg = load_params(ENV)
-        nxt, cat = verify_listing(listing_name, listing_city, env_cfg['API1']) # 'nxt' is dict of info of the verified input listing 
+        api =  env_cfg['API2']
+        
+        nxt, cat = verify_listing(listing_name, listing_city, api) # 'nxt' is dict of info of the verified input listing 
 
         # Get Metapath Choice 
         checked = request.form.getlist('mycheckbox')
@@ -96,6 +98,7 @@ def result():
         params["listing_city"] = listing_city
         params["listing_cat"] = cat
         params["listing_info"] = nxt
+        params["api_key"] = api
         with open("config/data-params.json", "w") as fp:
             json.dump(params, fp)
 
@@ -108,9 +111,9 @@ def result():
             json.dump(m_params, fp)
 		
         # Get Data (ETL)
-        #cfg = load_params(DATA_PARAMS)
-        #etl(**cfg)
-        #print('ETL Complete.')
+        cfg = load_params(DATA_PARAMS)
+        etl(**cfg)
+        print('ETL Complete.')
 
 
         # Generate recommendations
