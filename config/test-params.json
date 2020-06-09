@@ -1,6 +1,6 @@
 {
     "indir": "test/test_data/raw/df.csv",
-    "input_listing": "test/test_data/raw/input_listing.txt",
+    "listing_id": "AlO78to1upUkVhRx12XtVA",
     "metapath": "CAC",
     "N": 50,
     "top_n": 10,

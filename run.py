@@ -42,11 +42,13 @@ def main(targets):
     if 'model' in targets:
         cfg = load_params(MODEL_PARAMS)
         driver(**cfg)
+        print("Your recommendations are now in: ", cfg['outdir'] + "recommendatons.csv", ":)")
 
     # make the test target
     if 'test-project' in targets:
         cfg = load_params(TEST_PARAMS)
         driver(**cfg)
+        print("Your recommendations are now in: ", cfg['outdir'] + "recommendatons.csv", ":)")
 
     print('Finished in: {} seconds'.format(time.time() - start_time))
     return
