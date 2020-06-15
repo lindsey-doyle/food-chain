@@ -1,5 +1,5 @@
 # The Food Chain - A Personalized Restaurant Recommender System
----
+
 Leveraging Yelp data to develop a user-customizable, similarity-based restaurant recommendation system.
 
 About this project: http://team05.pythonanywhere.com/about  
