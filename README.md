@@ -2,7 +2,7 @@
 
 Leveraging Yelp data to develop a user-customizable, similarity-based restaurant recommendation system.
 
-- About this project: http://team05.pythonanywhere.com/about  
+- About this project: https://prezi.com/view/ZHyzEUbAjfRElKuvh2j0/  
 
 - Try it for yourself:  http://team05.pythonanywhere.com/  
 
